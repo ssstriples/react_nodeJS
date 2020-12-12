@@ -67,9 +67,9 @@ app.post('/api/users/login', (req, res) => {
         if(err) return res.status(400).send(err);
 
         // 토큰을 저장한다. 쿠키 or 로컬 스토리지
-        res.cookie("x_auth", user.token)
+        res.cookie('x_auth', user.token)
         .status(200)
-        .json({loginSuccess : true, userId : user._id})
+        .json({loginSuccess : true, userId : user._id});
       })
     })
   })
@@ -94,6 +94,19 @@ app.get('/api/users/auth', auth ,(req, res) => {
   )
 
 })
+
+app.get('/api/users/logout', auth, (req, res) => {
+  User.findOneAndUpdate({_id : req.user._id },
+    { token : ""}, // 토큰을 지워준다
+    (err, user) => {
+      if(err) return res.json({success : false, err})
+      return res.status(200).send({
+        success : true
+      })
+    }
+  )
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
