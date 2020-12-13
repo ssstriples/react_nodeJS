@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 function LandingPage(props) {
 
@@ -23,7 +24,7 @@ function LandingPage(props) {
   return (
     <div style={{
       display: 'flex', justifyContent: 'center', alignItems: 'center',
-      witdh: '100%', height: '100vh'
+      witdh: '10  0%', height: '100vh'
     }}>
       <h2>시작 페이지</h2>
 
@@ -34,4 +35,4 @@ function LandingPage(props) {
   );
 }
 
-export default LandingPage;
+export default withRouter(LandingPage);
